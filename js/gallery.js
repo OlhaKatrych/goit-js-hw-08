@@ -83,6 +83,13 @@ function handlerClick(e) {
 `);
 
   instance.show();
+  document.addEventListener("keydown", handlerKeydown);
+  function handlerKeydown(e) {
+    if (e.code === "Escape") {
+      instance.close();
+    }
+    document.removeEventListener("keydown", handlerKeydown);
+  }
 }
 
 function createMarkup(arr) {
