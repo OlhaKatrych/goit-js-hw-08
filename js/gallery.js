@@ -75,20 +75,26 @@ function handlerClick(e) {
     return;
   }
   const imageLarge = e.target.dataset.source;
-  const instance = basicLightbox.create(`
+  const instance = basicLightbox.create(
+    `
  
-  <img src="${imageLarge}">
-  
-	
-`);
+  <img src="${imageLarge}">`,
+    {
+      onClose: () => {
+        document.removeEventListener("keydown", handlerKeydown);
+      },
+    }
+  );
 
   instance.show();
+
   document.addEventListener("keydown", handlerKeydown);
   function handlerKeydown(e) {
     if (e.code === "Escape") {
       instance.close();
+    } else {
+      return;
     }
-    document.removeEventListener("keydown", handlerKeydown);
   }
 }
 
